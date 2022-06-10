@@ -1,0 +1,77 @@
+import pygame
+from pygame.locals import *
+from sys import exit
+
+# ALUNOS
+# BRUNO TEIXEIRA GONÇALVES DE SÁ
+# 5406482
+
+# MARCUS VINICIUS PAIXAO DE MORAES
+# 5406480
+
+# MERIELE LEITE DA SILVA DOS SANTOS
+# 5406479
+
+
+BOLA = bola = pygame.image.load('bola.jpg')
+CARRO = carro = pygame.image.load('carro.jpg')
+LIVROS = livros = pygame.image.load('livros.png')
+CARRO2 = carro2 = pygame.image.load('carro.jpg')
+
+imagem_tela = "CARRO"
+
+bola1 = 'BOLA'
+carro1 = 'CARRO'
+livros1 = 'LIVROS'
+
+
+pygame.init()
+clock = pygame.time.Clock()
+tela = pygame.display.set_mode([600,450])
+fonte_base = pygame.font.Font(None,60)
+texto = ''
+pygame.display.set_caption("====JOGO ESCREVA A PALAVRA =====")
+
+while True:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                print(texto)
+                if texto == carro1 and imagem_tela == carro1:
+                   print('trocou carro')
+                   carro.blit(bola, (0, 0))
+                   imagem_tela = bola1
+                else:
+                    print('Escreveu errado')
+
+                if texto == bola1 and imagem_tela == bola1:
+                   print('trocou bola')
+                   carro.blit(livros, (0, 0))
+                   imagem_tela = livros1
+                if texto == livros1 and imagem_tela == livros1:
+                   print('trocou livros')
+                   carro.blit(carro2, (0, 0))
+                   imagem_tela = carro1
+            if event.key == pygame.K_BACKSPACE:
+                texto = texto[:-1]
+            elif event.key != pygame.K_RETURN:
+                texto += event.unicode
+    pygame.display.update()
+
+
+
+
+
+
+
+
+
+    tela.fill((0,0,0))
+    texto_surf = fonte_base.render(texto,True,(255,255,255))
+    tela.blit(carro,(0,0))
+    tela.blit(texto_surf,(20,385))
+    pygame.display.flip()
+    clock.tick(60)
